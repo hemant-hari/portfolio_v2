@@ -1,6 +1,7 @@
 import { CineonToneMapping, PCFSoftShadowMap, sRGBEncoding, WebGLRenderer } from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { createScene } from './scene';
+import Stats from 'stats.js';
 import './style.css';
 
 const { camera, scene } = await createScene();
@@ -26,10 +27,16 @@ const controls = new OrbitControls(camera, canvas);
 controls.enableDamping = true;
 controls.enableZoom = true;
 
+const stats = new Stats();
+stats.showPanel(0);
+document.body.appendChild(stats.dom);
+
 function animate() {
+  stats.begin();
   requestAnimationFrame(animate);
 
   renderer.render(scene, camera);
+  stats.end();
 };
 
 animate();

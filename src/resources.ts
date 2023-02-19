@@ -25,5 +25,5 @@ function processChild(child: Object3D<THREE.Event>) {
   child.castShadow = true;
   child.receiveShadow = true;
 
-  console.log(child)
+  child.children.forEach(processChild);
 }
